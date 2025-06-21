@@ -11,3 +11,9 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 export class App {
   protected title = 'task-manager';
 }
+
+
+// TODO
+//  Filter with search
+//  Reactive Form
+//  API integration
