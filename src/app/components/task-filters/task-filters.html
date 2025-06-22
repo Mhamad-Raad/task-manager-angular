@@ -1,12 +1,18 @@
-<input
-  [(ngModel)]="searchTerm"
-  (input)="updateSearch()"
-  placeholder="Search tasks..."
-/>
+<div class="flex items-center gap-4 mb-4">
+  <input
+    [(ngModel)]="searchTerm"
+    (input)="updateSearch()"
+    placeholder="Search tasks..."
+    class="px-4 py-2 border rounded shadow-sm w-1/2 focus:ring focus:ring-blue-400 transition"
+  />
 
-<label for="statusFilter">Show tasks:</label>
-<select id="statusFilter" [(ngModel)]="showCompleted" (change)="updateStatus()">
-  <option value="all">All</option>
-  <option value="completed">Completed</option>
-  <option value="incomplete">Incomplete</option>
-</select>
+  <select
+    [(ngModel)]="showCompleted"
+    (change)="updateStatus()"
+    class="px-3 py-2 border rounded shadow-sm focus:ring-blue-400 transition"
+  >
+    <option value="all">All</option>
+    <option value="completed">Completed</option>
+    <option value="incomplete">Incomplete</option>
+  </select>
+</div>

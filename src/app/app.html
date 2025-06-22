@@ -1,8 +1,20 @@
-<nav>
-  <a routerLink="/">Tasks</a> |
-  <a routerLink="/add">Add Tasks</a>
-</nav>
-<h1 class="text-3xl font-bold underline">test</h1>
+<div class="min-h-screen bg-gray-100 text-gray-800 p-6">
+  <nav class="mb-6 flex justify-center gap-6 text-blue-600 font-semibold">
+    <a routerLink="/" routerLinkActive="underline text-blue-800 transition"
+      >Tasks</a
+    >
+    <a routerLink="/add" routerLinkActive="underline text-blue-800 transition"
+      >Add Tasks</a
+    >
+  </nav>
 
-<app-task-filters></app-task-filters>
-<router-outlet></router-outlet>
+  <h1 class="text-3xl font-bold text-center mb-4 underline underline-offset-4">
+    Task Manager
+  </h1>
+
+  <app-task-filters></app-task-filters>
+
+  <div class="mt-6 animate-[fadeIn_0.5s_ease-out_forwards]">
+    <router-outlet></router-outlet>
+  </div>
+</div>

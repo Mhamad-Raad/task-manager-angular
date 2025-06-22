@@ -15,6 +15,5 @@ export class App {
 }
 
 // TODO
-//  Filter with search
 //  Reactive Form
 //  API integration
