@@ -1,0 +1,12 @@
+<input
+  [(ngModel)]="searchTerm"
+  (input)="updateSearch()"
+  placeholder="Search tasks..."
+/>
+
+<label for="statusFilter">Show tasks:</label>
+<select id="statusFilter" [(ngModel)]="showCompleted" (change)="updateStatus()">
+  <option value="all">All</option>
+  <option value="completed">Completed</option>
+  <option value="incomplete">Incomplete</option>
+</select>
