@@ -1,0 +1,17 @@
+<div *ngIf="task; else notFound" class="p-6 bg-white shadow rounded">
+  <h2 class="text-2xl font-semibold mb-4">Task Details</h2>
+  <p><strong>ID:</strong> {{ task.id }}</p>
+  <p><strong>Title:</strong> {{ task.title }}</p>
+  <p>
+    <strong>Status:</strong>
+    <span
+      [ngClass]="{ 'text-green-600': task.completed, 'text-red-500': !task.completed }"
+    >
+      {{ task.completed ? 'Completed' : 'Incomplete' }}
+    </span>
+  </p>
+</div>
+
+<ng-template #notFound>
+  <div class="text-center text-red-500 text-lg mt-6">Task not found 🧐</div>
+</ng-template>

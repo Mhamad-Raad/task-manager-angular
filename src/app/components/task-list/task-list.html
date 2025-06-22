@@ -14,7 +14,12 @@
         [class.line-through]="task.completed"
         class="text-gray-800 transition"
       >
-        {{ task.title }}
+        <a
+          [routerLink]="['/task', task.id]"
+          class="hover:underline text-blue-600"
+        >
+          {{ task.title }}
+        </a>
       </span>
     </div>
 

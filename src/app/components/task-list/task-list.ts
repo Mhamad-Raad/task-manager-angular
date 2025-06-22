@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
@@ -8,7 +9,7 @@ import { Task } from '../../models/task.model';
   selector: 'app-task-list',
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
 export class TaskList implements OnInit {
   tasks: Task[] = [];
