@@ -1,17 +1,29 @@
-<div
-  class="mb-6 flex items-center gap-3 animate-[fadeIn_0.5s_ease-out_forwards]"
->
-  <input
-    [(ngModel)]="title"
-    (keyup.enter)="addTask()"
-    placeholder="Add a new task..."
-    class="flex-1 px-4 py-2 rounded border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-  />
+<form [formGroup]="form" (ngSubmit)="addTask()" class="flex gap-3 items-start">
+  <div class="flex-1">
+    <input
+      type="text"
+      formControlName="title"
+      placeholder="Add a task..."
+      class="w-full px-4 py-2 rounded border border-gray-300 focus:ring-blue-500"
+    />
+    <div
+      *ngIf="form.get('title')?.touched && form.get('title')?.invalid"
+      class="text-red-500 text-sm mt-1"
+    >
+      <span *ngIf="form.get('title')?.errors?.['required']"
+        >Title is required.</span
+      >
+      <span *ngIf="form.get('title')?.errors?.['minlength']"
+        >Must be at least 3 characters.</span
+      >
+    </div>
+  </div>
 
   <button
-    (click)="addTask()"
-    class="bg-blue-600 text-white px-4 py-2 rounded shadow-md hover:bg-blue-700 transition duration-300"
+    type="submit"
+    [disabled]="form.invalid"
+    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
   >
     Add
   </button>
-</div>
+</form>
