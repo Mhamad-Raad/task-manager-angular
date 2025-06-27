@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { Task } from '../models/task.model';
 
+const STORAGE_KEY = 'tasks';
+
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private tasks = new BehaviorSubject<Task[]>([]);
+  private tasks = new BehaviorSubject<Task[]>(this.loadFromStorage());
   tasks$ = this.tasks.asObservable();
 
   private searchTerm = new BehaviorSubject<string>('');
@@ -30,6 +32,12 @@ export class TaskService {
     })
   );
 
+  constructor() {
+    this.tasks$.subscribe((tasks) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    });
+  }
+
   setSearchTerm(term: string) {
     this.searchTerm.next(term);
   }
@@ -53,5 +61,14 @@ export class TaskService {
   deleteTask(id: number) {
     const updated = this.tasks.getValue().filter((t) => t.id !== id);
     this.tasks.next(updated);
+  }
+
+  private loadFromStorage(): Task[] {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
   }
 }
