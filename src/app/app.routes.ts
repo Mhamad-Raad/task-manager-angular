@@ -10,6 +10,7 @@ export const routes: Routes = [
     path: 'task/:id',
     component: TaskDetail,
     data: {
+      renderMode: 'prerender',
       getPrerenderParams: (): Promise<any>[] => [],
     },
   },
