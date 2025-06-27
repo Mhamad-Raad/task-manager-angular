@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { Task } from '../models/task.model';
 
@@ -6,7 +7,7 @@ const STORAGE_KEY = 'tasks';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private tasks = new BehaviorSubject<Task[]>(this.loadFromStorage());
+  private tasks = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasks.asObservable();
 
   private searchTerm = new BehaviorSubject<string>('');
@@ -32,10 +33,15 @@ export class TaskService {
     })
   );
 
-  constructor() {
-    this.tasks$.subscribe((tasks) => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    });
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      const storedTasks = this.loadFromStorage();
+      this.tasks.next(storedTasks);
+
+      this.tasks$.subscribe((tasks) => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      });
+    }
   }
 
   setSearchTerm(term: string) {
@@ -64,11 +70,14 @@ export class TaskService {
   }
 
   private loadFromStorage(): Task[] {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch {
+        return [];
+      }
     }
+    return [];
   }
 }

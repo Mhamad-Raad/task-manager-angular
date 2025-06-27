@@ -19,6 +19,13 @@ export class TaskFiltersComponent {
     this.taskService.setSearchTerm(this.searchTerm);
   }
 
+  resetFilters() {
+    this.searchTerm = '';
+    this.showCompleted = 'all';
+    this.updateSearch();
+    this.updateStatus();
+  }
+
   updateStatus() {
     const val = this.showCompleted;
     this.taskService.setShowCompleted(
