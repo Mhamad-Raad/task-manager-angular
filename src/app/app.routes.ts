@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RenderMode } from '@angular/ssr';
 import { TaskList } from './components/task-list/task-list';
 import { AddTask } from './components/add-task/add-task';
 import { TaskDetail } from './components/task-detail/task-detail';
@@ -10,8 +11,7 @@ export const routes: Routes = [
     path: 'task/:id',
     component: TaskDetail,
     data: {
-      renderMode: 'prerender',
-      getPrerenderParams: (): Promise<any>[] => [],
+      renderMode: RenderMode.Client,
     },
   },
 ];
