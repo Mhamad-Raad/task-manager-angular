@@ -1,18 +1,22 @@
-<div class="flex items-center gap-4 mb-4">
-  <input
-    [(ngModel)]="searchTerm"
-    (input)="updateSearch()"
-    placeholder="Search tasks..."
-    class="px-4 py-2 border rounded shadow-sm w-1/2 focus:ring focus:ring-blue-400 transition"
-  />
-
-  <select
-    [(ngModel)]="showCompleted"
-    (change)="updateStatus()"
-    class="px-3 py-2 border rounded shadow-sm focus:ring-blue-400 transition"
+<div class="flex justify-center">
+  <div
+    class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl flex flex-col sm:flex-row items-center gap-4"
   >
-    <option value="all">All</option>
-    <option value="completed">Completed</option>
-    <option value="incomplete">Incomplete</option>
-  </select>
+    <input
+      [(ngModel)]="searchTerm"
+      (input)="updateSearch()"
+      placeholder="Search tasks..."
+      class="flex-1 px-4 py-2 border rounded shadow-sm focus:ring focus:ring-blue-400 transition w-full sm:w-auto"
+    />
+
+    <select
+      [(ngModel)]="showCompleted"
+      (change)="updateStatus()"
+      class="px-4 py-2 border rounded shadow-sm focus:ring-blue-400 transition w-full sm:w-auto"
+    >
+      <option value="all">All</option>
+      <option value="completed">Completed</option>
+      <option value="incomplete">Incomplete</option>
+    </select>
+  </div>
 </div>
